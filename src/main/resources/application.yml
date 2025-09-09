@@ -1,0 +1,7 @@
+
+logging:
+  level:
+    root: INFO
+    com.javaTest: DEBUG
+    org.springframework.web: WARN
+    org.hibernate: ERROR
