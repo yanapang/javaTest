@@ -1,5 +1,7 @@
 package com.javaTest.deploy.service;
 
+import com.javaTest.common.Status;
+import com.javaTest.deploy.entity.Deploy;
 import com.javaTest.deploy.repository.DeployRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 public class DeployService {
 
     private final DeployRepository deployRepository;
-    
+
     @Async
     public CompletableFuture<String> deploy() {
         log.debug("========== [Deploy executed] ==========");
@@ -27,6 +29,13 @@ public class DeployService {
                 throw new RuntimeException(e);
             }
             return "Deploy ok";
-        });
+        }).whenComplete((result, throwable) -> {
+                    var testDeploy = Deploy.builder()
+                            .name("TEST_DEPLOY")
+                            .status(Status.SUCCESS)
+                            .build();
+                    deployRepository.save(testDeploy);
+                }
+        );
     }
 }

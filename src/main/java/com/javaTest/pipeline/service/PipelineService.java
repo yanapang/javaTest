@@ -21,8 +21,13 @@ public class PipelineService {
             var build = buildService.build();
             var deploy = deployService.deploy();
 
-            log.debug(String.format("Build Result : %s", build));
-            log.debug(String.format("Deploy Result : %s", deploy));
+            build.whenComplete((Result, throwable) ->
+                    log.debug(String.format(" ======== Build Result : %s", build))
+            );
+
+            deploy.whenComplete((Result, throwable) ->
+                    log.debug(String.format(" ======== Deploy Result : %s", deploy))
+            );
 
         } catch (Exception ex) {
             log.error("Pipeline failed", ex);
