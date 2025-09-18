@@ -4,11 +4,14 @@ import com.javaTest.build.entity.Build;
 import com.javaTest.common.Status;
 import com.javaTest.deploy.entity.Deploy;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Table
 @Entity
-@Data
+@Getter
+@NoArgsConstructor
 public class Pipeline {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,11 +23,19 @@ public class Pipeline {
     private Status status;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "build_id")
+    private Build build;
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "deploy_id")
     private Deploy deploy;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "build_id")
-    private Build build;
-    
+    @Builder
+    public Pipeline(String name, Status status, Deploy deploy, Build build) {
+        this.name = name;
+        this.status = status;
+        this.deploy = deploy;
+        this.build = build;
+    }
+
 }

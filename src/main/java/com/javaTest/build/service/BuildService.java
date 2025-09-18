@@ -17,6 +17,10 @@ public class BuildService {
 
     private final BuildRepository buildRepository;
 
+    public Build getBuild(long id) {
+        return buildRepository.findById(id).get();
+    }
+
     @Async
     public CompletableFuture<String> build() {
         log.debug("========== [Build executed] ==========");

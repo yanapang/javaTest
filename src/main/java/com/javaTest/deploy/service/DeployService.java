@@ -17,6 +17,10 @@ public class DeployService {
 
     private final DeployRepository deployRepository;
 
+    public Deploy getDeploy(long id) {
+        return deployRepository.findById(id).get();
+    }
+
     @Async
     public CompletableFuture<String> deploy() {
         log.debug("========== [Deploy executed] ==========");
