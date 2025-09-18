@@ -21,7 +21,10 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation('log4j:log4j:1.2.17')
-    
+
+    //Runtime db
+    runtimeOnly 'com.h2database:h2'
+
     // Lombok for reducing boilerplate code
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

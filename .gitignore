@@ -1,6 +1,21 @@
 # Ignore Gradle project-specific cache directory
-.gradle
-.idea
-
 # Ignore Gradle build output directory
-build
+.gradle
+**/build/
+!src/**/build/
+
+# JetBrains IDE
+.idea/
+
+# Log files
+*.log
+
+# Package files
+*.jar
+
+# Maven
+target/
+dist/
+
+# IntelliJ
+out/
