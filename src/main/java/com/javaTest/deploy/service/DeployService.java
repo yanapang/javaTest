@@ -1,5 +1,6 @@
 package com.javaTest.deploy.service;
 
+import com.javaTest.deploy.repository.DeployRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
@@ -12,6 +13,8 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class DeployService {
 
+    private final DeployRepository deployRepository;
+    
     @Async
     public CompletableFuture<String> deploy() {
         log.debug("========== [Deploy executed] ==========");
