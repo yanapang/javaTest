@@ -46,30 +46,23 @@ src/
 ./gradlew test --info
 ```
 
-## How to Add a New Experiment
-1. Create a new domain package under `src/main/java/com/javaTest/<your-domain>/`.
-2. Add minimal code to demonstrate or validate the idea.
-3. Add tests under `src/test/java/com/javaTest/<your-domain>/`.
-4. If necessary, configure logging or properties in `src/main/resources/application.yml`.
-5. Document the experiment briefly in this README (section: Experiments).
+## DB Setting
+- Create Docker Container using following commands
+```
+docker run -d --name mariadbForPrj \
+  -p 3306:3306 \
+  -e MYSQL_ROOT_PASSWORD=myPassword \
+  -v /my/own/datadir:/var/lib/mysql \
+  mariadb
+```
 
-### Suggested Naming
-- Packages: `com.javaTest.<domain>`
-- Tests: `<ClassName>Test` (JUnit 5)
-- Keep experiments small, focused, and disposable.
-
-## Logging
-Logging is configured via `src/main/resources/application.yml`.
-- Default levels can be adjusted per package (e.g., `com.javaTest: DEBUG`).
-- Tests may log timings, start/end markers, and results for easy comparison.
 
 ## Dependencies
 This project intentionally keeps dependencies minimal:
 - Spring Boot starter(s)
 - JUnit 5 (testing)
 - Lombok (optional, for boilerplate reduction)
-
-You can add experiment-specific dependencies in `build.gradle` as needed. Prefer isolating additions to what the experiment requires.
+- Maria DB Client
 
 ## Experiments (Living List)
 - Async patterns with `CompletableFuture` (sequential vs parallel timing)
